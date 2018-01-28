@@ -4,7 +4,8 @@
 		{
 			"title": "Setup",
 			"start": "15.03.2016",
-			"end": "16.03.2016"
+			"end": "16.03.2016",
+			"color": "#1100AA"
 		},
 		{
 			"title": "Development",
