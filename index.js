@@ -5,7 +5,7 @@
 	var i, j;
 	var itemLength = data.items.length, scaleLength = data.scale.length;
 
-	diagram(data, 'main');
+	var diagram = new Diagram(data, 'main');
 
 	// document.write("<table border=" + 1 + ">");
 	// for(i = 0; i <= itemLength; i++){
@@ -38,23 +38,35 @@
 		}
 	}
 
-	function diagram(data, element) {
+	function Diagram(data, element) {
+		this.data = data;
+		this.element = element;
+
 		var options = {
 			class: "blue"
 		}
 		var mainElement = document.getElementById(element);
 		data.items.forEach(function(elemItem){
-			mainElement.appendChild(newElement());
-			console.log(elemItem);
-			data.scale.forEach(function(elemScale){
-				elemScale.appendChild(newElement());
-				console.log(elemScale);
-			})
+			mainElement.appendChild(newElement(new Item(elemItem)));
+			// console.log();
+			// data.scale.forEach(function(elemScale){
+			// 	mainElement.appendChild(newElement());
+			// 	console.log(elemScale);
+			// })
 		})
 		function newElement(value){
 			var element = document.createElement('div');
+			element.innerHTML = value.title;
+			// console.log('newEl',value);
 			return element;
 		}
+	}
+
+	function Item(item){
+		this.color = item.color;
+		this.end = item.end;
+		this.start = item.start;
+		this.title = item.title;
 	}
 
 	function hasBackground(item, scale){
