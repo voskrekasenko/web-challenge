@@ -1,11 +1,8 @@
 (function(){
 	"use strict"
 
-	var data = JSON.parse(getJson('data.json'));
-	var i, j;
-	var itemLength = data.items.length, scaleLength = data.scale.length;
-
-	var diagram = new Diagram(data, 'main');
+	// var data = JSON.parse(getJson('data.json'));
+	var diagram = new Diagram('data.json', 'main');
 
 	// document.write("<table border=" + 1 + ">");
 	// for(i = 0; i <= itemLength; i++){
@@ -24,44 +21,43 @@
 	// document.write("</table>");
 
 // epic functions
+	function Diagram(url, element) {
+		this.getJson = (function(url) {
+			var xhr = new XMLHttpRequest();
 
-	function getJson(url) {
-		var xhr = new XMLHttpRequest();
+			xhr.open('GET', url, true);
+			xhr.send();
 
-		xhr.open('GET', url, false);
-		xhr.send();
-
-		if (xhr.status != 200) {
-			return xhr.status + ': ' + xhr.statusText;
-		} else {
+			if (xhr.status != 200) {
+				return xhr.status + ': ' + xhr.statusText;
+			}
 			return  xhr.responseText;
-		}
-	}
-
-	function Diagram(data, element) {
-		this.data = data;
+		}());
+		this.data = getJson(url);
 		this.element = element;
 
 		var options = {
 			class: "blue"
 		}
 		var mainElement = document.getElementById(element);
-		data.items.forEach(function(elemItem){
-			mainElement.appendChild(newElement(new Item(elemItem)));
-			// console.log();
-			// data.scale.forEach(function(elemScale){
-			// 	mainElement.appendChild(newElement());
-			// 	console.log(elemScale);
-			// })
+		data.scale.forEach(function(elemScale, indexScale){
+			mainElement.appendChild(newScale(elemScale));
 		})
-		function newElement(value){
-			var element = document.createElement('div');
-			element.innerHTML = value.title;
-			// console.log('newEl',value);
-			return element;
-		}
+		data.items.forEach(function(elemItem, indexItem){
+			mainElement.appendChild(newElement(new Item(elemItem)));
+		})
 	}
-
+	function newElement(value){
+		var element = document.createElement('div');
+		element.innerHTML = value.title;
+		// console.log('newEl',value);
+		return element;
+	}
+	function newScale(value){
+		var element = document.createElement('div');
+		element.innerHTML = value;
+		return element;
+	}
 	function Item(item){
 		this.color = item.color;
 		this.end = item.end;

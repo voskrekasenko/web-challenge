@@ -1,0 +1,23 @@
+{
+  "name": "web-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^4.16.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voskrekasenko/web-challenge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/voskrekasenko/web-challenge/issues"
+  },
+  "homepage": "https://github.com/voskrekasenko/web-challenge#readme"
+}
