@@ -1,21 +1,17 @@
 (function(){
-	"use strict"
+	'use strict';
 
 	var Diagram = function (url, element) {
-		this.data = getJson(url);
-		this.element = element;
-
-		var options = {
-			class: "blue"
-		}
-		var mainElement = document.getElementById(element);
+		var vm = this;
+		vm.element = element;
+		// var mainElement = document.getElementById(element);
 		// data.scale.forEach(function(elemScale, indexScale){
 		// 	mainElement.appendChild(newScale(elemScale));
 		// })
 		// data.items.forEach(function(elemItem, indexItem){
 		// 	mainElement.appendChild(newElement(new Item(elemItem)));
 		// })
-	}
+	};
 	Diagram.prototype.getJson = function(url) {
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', url);
@@ -29,8 +25,8 @@
 		});
 	};
 
-	var createDiagram = new Diagram('data.json', 'main');
-	console.log(createDiagram);
+  var createDiagram = new Diagram('data.json', 'main');
+  console.log(createDiagram.getJson('data.json'));
 
 	function newElement(value){
 		var element = document.createElement('div');
@@ -43,4 +39,4 @@
 		return element;
 	}
 
-}())
+}());
