@@ -4,7 +4,6 @@
   var Diagram = function (url, element) {
     this.mainElement = document.getElementById(element);
     this.getJson(url);
-    this.helpers();
   };
 
   Diagram.prototype.getJson = function (url) {
@@ -17,23 +16,33 @@
         return xhr.status + ': ' + xhr.statusText;
       }
       self.data = JSON.parse(xhr.responseText);
-      self.createListItems(self.data.scale, 'field_scale');
-      self.createListItems(self.data.items, 'field_items');
+
+      self.helpers.createListItems(self.data.scale, {ul:'list_scale', li:'field_scale'}, self.mainElement);
+      self.helpers.createListItems(self.data.items, {ul:'list_items', li:'field_items'}, self.mainElement);
+      self.helpers.createTableResults(self.data.scale, 'results', self.mainElement);
     });
   };
 
-  Diagram.prototype.helpers = function (){
-    this.createListItems = function(items, itemClass){
+  Diagram.prototype.helpers = {
+    createListItems: function (items, classList, mainElement){
+      var fragment = document.createDocumentFragment();
       var ul = document.createElement('ul');
-      this.mainElement.appendChild(ul);
+      ul.classList.add(classList.ul);
+      mainElement.appendChild(ul);
       items.forEach(function(item){
         var li = document.createElement('li');
-        li.classList.add(itemClass);
+        li.classList.add(classList.li);
         li.innerHTML = item.title || item;
-        ul.appendChild(li);
+        fragment.appendChild(li);
       });
-    };
-  }
+      ul.appendChild(fragment);
+    },
+    createTableResults: function(scales, classResults, mainElement){
+      var div = document.createElement('div');
+      div.classList.add(classResults);
+      mainElement.appendChild(div);
+    }
+  };
 
   var createDiagram = new Diagram('data.json', 'main');
   console.log(createDiagram);
