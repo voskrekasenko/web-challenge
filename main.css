@@ -22,9 +22,16 @@ body {
   margin: 4px;
   color: #ffeb3b;
 }
-.results {
+.results_block {
   display: inline-block;
-  width: 600px;
-  height: 100px;
-  background-color: rgb(191, 238, 136);
+}
+.results_list {
+  width: 580px;
+  padding-left: 40px;
+  margin: 0;
+}
+.results_list li {
+  line-height: 10px;
+  padding-top: 22px;
+  list-style: none;
 }
