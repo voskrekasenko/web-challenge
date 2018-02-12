@@ -44,13 +44,13 @@ body {
   color: #ffeb3b;
   text-align: right;
   width: 100%;
-  border-right: solid 1px #fff;
+  border-right: double 3px #fff;
 }
 .field_items:after {
   position: absolute;
   content: '|';
   color: #fff;
-  right: -4px;
+  right: 5px;
   top: 0;
   transform: rotate(90deg);
 }
