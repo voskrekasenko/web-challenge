@@ -43,7 +43,6 @@
     createTableResults: function(data, classResults, mainElement){
       var fragment = document.createDocumentFragment();
       var scaleFieldWidth = document.getElementsByClassName('field_scale')[0].offsetWidth;
-      console.log(scaleFieldWidth);
       var div = document.createElement('div');
       var ul = document.createElement('ul');
       div.classList.add(classResults);
