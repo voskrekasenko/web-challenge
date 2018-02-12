@@ -42,10 +42,13 @@
     },
     createTableResults: function(data, classResults, mainElement){
       var fragment = document.createDocumentFragment();
+      var scaleFieldWidth = document.getElementsByClassName('field_scale')[0].offsetWidth;
+      console.log(scaleFieldWidth);
       var div = document.createElement('div');
       var ul = document.createElement('ul');
       div.classList.add(classResults);
       ul.classList.add('results_list');
+      ul.style.width = scaleFieldWidth * data.scale.length + 'px';
       var dates = {
         min: 0,
         max: 0,
@@ -60,8 +63,8 @@
       dates.long = (dates.max - dates.min);
       for(var i = 0; i < data.items.length; i++){
         var li = document.createElement('li');
-        li.style.width = this.getWidthField(data.items[i], dates.long) * 5 + '%';
-        li.style.marginLeft = this.getOffsetField(data.items[i], dates.min, dates.long) * 5 + '%';
+        li.style.width = this.getWidthField(data.items[i], dates.long) * scaleFieldWidth + 'px';
+        li.style.marginLeft = this.getOffsetField(data.items[i], dates.min, dates.long) * scaleFieldWidth + 'px';
         li.style.backgroundColor = data.items[i].color;
         fragment.appendChild(li);
       }
@@ -70,10 +73,10 @@
       mainElement.appendChild(div);
     },
     getWidthField: function(item, long){
-      return (this.dateUtcDays(item.end) - this.dateUtcDays(item.start))*100/long;
+      return this.dateUtcDays(item.end) - this.dateUtcDays(item.start);
     },
     getOffsetField: function(item, min, long){
-      return (this.dateUtcDays(item.start) - min)*100/long;
+      return this.dateUtcDays(item.start) - min;
     },
     dateUtcDays: function(str){
       var num = str.split('.');
@@ -82,6 +85,5 @@
   };
 
   var createDiagram = new Diagram('data.json', 'main');
-  console.log(createDiagram);
 
 }());
